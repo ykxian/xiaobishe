@@ -188,7 +188,7 @@ export default {
       }
     },
     load() {
-      request.get("/user/page", {
+      request.get("/device/page", {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
@@ -205,7 +205,7 @@ export default {
       })
     },
     save() {
-      request.post("/user", this.form).then(res => {
+      request.post("/device", this.form).then(res => {
         if (res) {
           this.$message.success("保存成功")
           this.dialogFormVisible = false
@@ -224,7 +224,7 @@ export default {
       this.dialogFormVisible = true
     },
     del(id) {
-      request.delete("/user/" + id).then(res => {
+      request.delete("/device/" + id).then(res => {
         if (res) {
           this.$message.success("删除成功")
           this.load()
