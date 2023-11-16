@@ -234,9 +234,9 @@ export default {
       })
     },
     reset() {
-      this.username = ""
-      this.email = ""
-      this.address = ""
+      this.id = ""
+      this.deviceName = ""
+      this.info = ""
       this.load()
     },
     handleSizeChange(pageSize) {
