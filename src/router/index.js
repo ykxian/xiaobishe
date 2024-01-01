@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from "@/store";
+import Login from '@/components/Login'
+import Register from '@/components/Register'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/manage',
     component: () => import('../views/Manage.vue'),
     redirect: "/home",
     children: [
@@ -19,11 +21,16 @@ const routes = [
     name: 'About',
     component: () => import('../views/AboutView.vue')
   },
-  // {
-  //   path: '/login',
-  //   name: 'Login',
-  //   component: () => import('../views/Login.vue')
-  // }
+  {
+    path: '/',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  }
 ]
 
 const router = new VueRouter({
