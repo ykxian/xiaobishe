@@ -26,8 +26,9 @@
 
     <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"  @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="id" label="ID" width="80"></el-table-column>
+<!--      <el-table-column prop="id" label="ID" width="80"></el-table-column>-->
       <el-table-column prop="dName" label="名称" width="140"></el-table-column>
+      <el-table-column prop="dType" label="类型" width="120"></el-table-column>
       <el-table-column label="操作"   align="center">
         <template slot-scope="scope">
           <el-button type="success" @click="handleEdit(scope.row)">编辑 <i class="el-icon-edit"></i></el-button>
@@ -65,6 +66,17 @@
         <el-form-item label="名称">
           <el-input v-model="form.dName" autocomplete="off"></el-input>
         </el-form-item>
+
+        <el-form-item label="设备类型">
+          <el-select v-model="form.type" placeholder="请选择">
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="danger"@click="dialogFormVisible = false">取 消</el-button>
@@ -87,7 +99,24 @@ export default {
       dName: "",
       form: {},
       dialogFormVisible: false,
-      multipleSelection: []
+      multipleSelection: [],
+      // 设备类型下拉菜单
+      options: [{
+        value: '选项1',
+        label: '黄金糕'
+      }, {
+        value: '选项2',
+        label: '双皮奶'
+      }, {
+        value: '选项3',
+        label: '蚵仔煎'
+      }, {
+        value: '选项4',
+        label: '龙须面'
+      }, {
+        value: '选项5',
+        label: '北京烤鸭'
+      }]
     }
   },
   created() {
