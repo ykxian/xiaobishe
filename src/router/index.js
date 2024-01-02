@@ -8,9 +8,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/manage',
+    path: '/',
     component: () => import('../views/Manage.vue'),
-    redirect: "/home",
+    //redirect: "/home",
     children: [
       { path: 'home', name: '首页', component: () => import('../views/Home.vue')},
       { path: 'device', name: '设备管理', component: () => import('../views/Device.vue')},
@@ -22,7 +22,7 @@ const routes = [
     component: () => import('../views/AboutView.vue')
   },
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login
   },

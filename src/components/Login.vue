@@ -2,7 +2,7 @@
   <div class="login" clearfix>
     <div class="login-wrap">
       <el-row type="flex" justify="center">
-        <el-form ref="loginForm" :model="user" :rules="rules" status-icon label-width="80px">
+        <el-form ref="loginForm" :model="user" status-icon label-width="80px">
           <h3>登录</h3>
           <hr>
           <el-form-item prop="username" label="用户名">
@@ -45,15 +45,11 @@ export default {
       } else {
         //校验用户名和密码是否正确;
         // this.$router.push({ path: "/personal" });
-        axios
-          .post("/login/", {
-            name: this.user.username,
-            password: this.user.password
-          })
+          this.request.post("/user/login", this.user)
           .then(res => {
             // console.log("输出response.data.status", res.data.status);
-            if (res.data.status === 200) {
-              this.$router.push({ path: "/personal" });
+            if (res) {
+              this.$router.push({ path: "/device" });
             } else {
               alert("您输入的用户名或密码错误！");
             }
