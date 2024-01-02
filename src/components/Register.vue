@@ -58,7 +58,7 @@ export default {
         } else {
           // this.$router.push({ path: "/" }); //无需向后台提交数据，方便前台调试
           axios
-            .post("/register/", {
+            .post("/register", {
               name: this.user.username,
               email: this.user.email,
               password: this.user.password
@@ -67,6 +67,7 @@ export default {
               // console.log("输出response.data", res.data);
               // console.log("输出response.data.status", res.data.status);
               if (res.data.status === 200) {
+                this.$message.success("注册成功！");
                 this.$router.push({ path: "/" });
               } else {
                 alert("您输入的用户名已存在！");

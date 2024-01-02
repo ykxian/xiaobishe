@@ -30,6 +30,11 @@ export default {
     collapseBtnClass: String,
     collapse: Boolean,
   },
+  data(){
+    return{
+      user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {}
+    }
+  },
   computed: {
     currentPathName () {
       return this.$store.state.currentPathName;　　//需要监听的数据

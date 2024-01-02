@@ -48,8 +48,10 @@ export default {
           this.request.post("/user/login", this.user)
           .then(res => {
             // console.log("输出response.data.status", res.data.status);
-            if (res) {
-              this.$router.push({ path: "/device" });
+            if (res.code==="200") {
+              localStorage.setItem("user", JSON.stringify(res.data)) //存储用户信息
+              this.$router.push({ path: "/" });
+              this.$message.success("登录成功！");
             } else {
               alert("您输入的用户名或密码错误！");
             }
