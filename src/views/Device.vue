@@ -66,7 +66,6 @@
         <el-form-item label="名称">
           <el-input v-model="form.dName" autocomplete="off"></el-input>
         </el-form-item>
-
         <el-form-item label="设备类型">
           <el-select v-model="form.type" placeholder="请选择">
             <el-option
