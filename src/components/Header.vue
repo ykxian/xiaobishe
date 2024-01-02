@@ -11,8 +11,13 @@
     <el-dropdown style="width: 70px; cursor: pointer">
       <span>啊啊啊</span><i class="el-icon-arrow-down" style="margin-left: 5px"></i>
       <el-dropdown-menu slot="dropdown" style="width: 100px; text-align: center">
-        <el-dropdown-item style="font-size: 14px; padding: 5px 0">个人信息</el-dropdown-item>
-        <el-dropdown-item style="font-size: 14px; padding: 5px 0">退出</el-dropdown-item>
+        <el-dropdown-item style="font-size: 14px; padding: 5px 0">
+<!--          <router-link to="/home">个人信息</router-link>-->
+          <span style="text-decoration: none" @click="personinfo">个人信息</span>
+        </el-dropdown-item>
+        <el-dropdown-item style="font-size: 14px; padding: 5px 0">
+          <span style="text-decoration: none" @click="logout">退出</span>
+        </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -28,6 +33,16 @@ export default {
   computed: {
     currentPathName () {
       return this.$store.state.currentPathName;　　//需要监听的数据
+    }
+  },
+  methods:{
+    logout(){
+      this.$router.push("/login")
+      localStorage.removeItem("user")
+      this.$message.success("退出成功")
+    },
+    personinfo(){
+
     }
   }
 }
