@@ -28,7 +28,7 @@
       <el-table-column type="selection" width="55"></el-table-column>
 <!--      <el-table-column prop="id" label="ID" width="80"></el-table-column>-->
       <el-table-column prop="dName" label="名称" width="140"></el-table-column>
-      <el-table-column prop="dType" label="类型" width="120"></el-table-column>
+      <el-table-column prop="type" label="类型" width="120"></el-table-column>
       <el-table-column label="操作"   align="center">
         <template slot-scope="scope">
           <el-button type="success" @click="handleEdit(scope.row)">编辑 <i class="el-icon-edit"></i></el-button>
@@ -60,9 +60,9 @@
 
     <el-dialog title="设备信息" :visible.sync="dialogFormVisible" width="30%" >
       <el-form label-width="80px" size="small">
-        <el-form-item label="ID">
-          <el-input v-model="form.id" autocomplete="off"></el-input>
-        </el-form-item>
+<!--        <el-form-item label="ID">-->
+<!--          <el-input v-model="form.id" autocomplete="off"></el-input>-->
+<!--        </el-form-item>-->
         <el-form-item label="名称">
           <el-input v-model="form.dName" autocomplete="off"></el-input>
         </el-form-item>
@@ -94,27 +94,22 @@ export default {
       total: 0,
       pageNum: 1,
       pageSize: 2,
-      id: "",
+      // id: "",
       dName: "",
+      type:"",
       form: {},
       dialogFormVisible: false,
       multipleSelection: [],
       // 设备类型下拉菜单
       options: [{
-        value: '选项1',
-        label: '黄金糕'
+        value: '1',
+        label: '温度型设备'
       }, {
-        value: '选项2',
-        label: '双皮奶'
+        value: '2',
+        label: '湿度型设备'
       }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
+        value: '3',
+        label: '光照型设备'
       }]
     }
   },
@@ -127,8 +122,9 @@ export default {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          id: this.id,
+          // id: this.id,
           dName: this.dName,
+          type: this.type
         }
       }).then(res => {
         console.log(res)
@@ -183,8 +179,9 @@ export default {
       })
     },
     reset() {
-      this.id = ""
+      // this.id = ""
       this.dName = ""
+      this.type=""
       this.load()
     },
     handleSizeChange(pageSize) {
