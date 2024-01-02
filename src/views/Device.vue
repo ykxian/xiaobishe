@@ -26,7 +26,7 @@
 
     <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"  @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
-<!--      <el-table-column prop="id" label="ID" width="80"></el-table-column>-->
+      <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="dName" label="名称" width="140"></el-table-column>
       <el-table-column prop="type" label="类型" width="120"></el-table-column>
       <el-table-column label="操作"   align="center">
@@ -94,7 +94,7 @@ export default {
       total: 0,
       pageNum: 1,
       pageSize: 2,
-      // id: "",
+      id: "",
       dName: "",
       type:"",
       form: {},
@@ -122,7 +122,7 @@ export default {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          // id: this.id,
+          id: this.id,
           dName: this.dName,
           type: this.type
         }
@@ -130,6 +130,9 @@ export default {
         console.log(res)
 
         this.tableData = res.records
+        //根据type数字显示设备类型
+        var t=["温度型设备","湿度型设备","光照型设备"]
+        this.tableData.type=t[res.records.type-1]
         this.total = res.total
 
       })
@@ -179,7 +182,7 @@ export default {
       })
     },
     reset() {
-      // this.id = ""
+      this.id = ""
       this.dName = ""
       this.type=""
       this.load()
