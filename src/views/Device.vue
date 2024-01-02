@@ -12,7 +12,8 @@
       <el-popconfirm
           class="ml-5"
           confirm-button-text='确定'
-          cancel-button-text='我再想想'
+          cancel-button-text='我再想
+          想'
           icon="el-icon-info"
           icon-color="red"
           title="您确定批量删除这些数据吗？"
@@ -26,9 +27,9 @@
 
     <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"  @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
-<!--      <el-table-column prop="id" label="ID" width="80"></el-table-column>-->
+      <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="dName" label="名称" width="140"></el-table-column>
-      <el-table-column prop="type" label="类型" width="120"></el-table-column>
+      <el-table-column prop="typeString" label="类型" width="120"></el-table-column>
       <el-table-column label="操作"   align="center">
         <template slot-scope="scope">
           <el-button type="success" @click="handleEdit(scope.row)">编辑 <i class="el-icon-edit"></i></el-button>
@@ -90,13 +91,15 @@ export default {
   name: "Device",
   data() {
     return {
+      t:["温度型设备","湿度型设备","光照型设备"],
       tableData: [],
       total: 0,
       pageNum: 1,
       pageSize: 2,
-      // id: "",
+      id: "",
       dName: "",
       type:"",
+      typeString:"",
       form: {},
       dialogFormVisible: false,
       multipleSelection: [],
@@ -122,17 +125,25 @@ export default {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          // id: this.id,
+          id: this.id,
           dName: this.dName,
           type: this.type
         }
       }).then(res => {
-        console.log(res)
+        console.log(res.records)
 
         this.tableData = res.records
-        this.total = res.total
+        //根据type数字显示设备类型
 
+        // this.tableData.type=t[res.records.type-1]
+       this.tableData.forEach(device=>{
+         device.typeString =this.getTypeString(device.type);
+       })
+        this.total = res.total
       })
+    },
+    getTypeString(type){
+      return this.t[type-1];
     },
     save() {
       this.request.post("/device", this.form).then(res => {
@@ -179,7 +190,7 @@ export default {
       })
     },
     reset() {
-      // this.id = ""
+      this.id = ""
       this.dName = ""
       this.type=""
       this.load()
