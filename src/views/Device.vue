@@ -21,7 +21,7 @@
         <el-button type="danger" slot="reference">批量删除 <i class="el-icon-remove-outline"></i></el-button>
       </el-popconfirm>
       <el-button type="primary" class="ml-5">导入 <i class="el-icon-bottom"></i></el-button>
-      <el-button type="primary">导出 <i class="el-icon-top"></i></el-button>
+      <el-button type="primary" @click="handleExport">导出 <i class="el-icon-top"></i></el-button>
     </div>
 
     <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"  @selection-change="handleSelectionChange">
@@ -197,6 +197,9 @@ export default {
       console.log(pageNum)
       this.pageNum = pageNum
       this.load()
+    },
+    handleExport(){
+        window.open("http://localhost:80/device/export")
     }
   }
 }
