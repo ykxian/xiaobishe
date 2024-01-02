@@ -14,8 +14,9 @@
           <el-form-item prop="password" label="设置密码">
             <el-input v-model="user.password" show-password placeholder="请输入密码"></el-input>
           </el-form-item>
-          <el-form-item>
-            <el-button type="primary" icon @click="doRegister()">注册账号</el-button>
+          <el-form-item style="margin: 5px 0; text-align: right">
+            <el-button type="primary" autocomplete="off" size="small" icon @click="doRegister()">注册账号</el-button>
+            <el-button type="warning" autocomplete="off" size="small" icon @click="$router.push('/login')">返回登录</el-button>
           </el-form-item>
         </el-form>
       </el-row>
