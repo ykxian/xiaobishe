@@ -42,6 +42,7 @@
           >
             <el-button type="danger" slot="reference">删除 <i class="el-icon-remove-outline"></i></el-button>
           </el-popconfirm>
+          <el-button type="primary" @click="handleView(scope.row)" style="margin: 5px">查看 <i class="el-icon-view"></i></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -207,6 +208,9 @@ export default {
     },
     handleExport(){
         window.open("http://localhost:80/device/export")
+    },
+    handleView(row){
+      this.$message.success("测试"+row.typeString)
     }
   }
 }
