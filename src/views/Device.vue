@@ -50,7 +50,7 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="pageNum"
-          :page-sizes="[2, 5, 10, 20]"
+          :page-sizes="[5, 10, 15, 20]"
           :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total">
@@ -93,7 +93,7 @@ export default {
       tableData: [],
       total: 0,
       pageNum: 1,
-      pageSize: 2,
+      pageSize: 5,
       id: "",
       dName: "",
       type:"",
@@ -128,7 +128,8 @@ export default {
           type: this.type
         }
       }).then(res => {
-        //console.log(res.records)
+        console.log("res=")
+        console.log(res)
 
         this.tableData = res.records
         this.total = res.total
@@ -195,12 +196,12 @@ export default {
       this.load()
     },
     handleSizeChange(pageSize) {
-      console.log(pageSize)
+      console.log("pagesize="+pageSize)
       this.pageSize = pageSize
       this.load()
     },
     handleCurrentChange(pageNum) {
-      console.log(pageNum)
+      console.log("pagenum="+pageNum)
       this.pageNum = pageNum
       this.load()
     },
