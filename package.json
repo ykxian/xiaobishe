@@ -7,6 +7,9 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@antv/l7": "^2.2.41",
+    "@antv/l7-maps": "^2.2.41",
+    "@jiaminghi/data-view": "^2.10.0",
     "axios": "^1.6.2",
     "core-js": "^3.8.3",
     "echarts": "^5.4.3",
@@ -19,7 +22,12 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.6.14",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "stylus": "^0.54.7",
+    "stylus-loader": "^3.0.2"
   },
   "browserslist": [
     "> 1%",
