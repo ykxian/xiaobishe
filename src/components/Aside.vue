@@ -27,6 +27,16 @@
         <span slot="title">设备管理</span>
       </el-menu-item>
     </el-submenu>
+    <el-submenu index="3">
+      <template slot="title">
+        <i class="el-icon-monitor"></i>
+        <span slot="title">数据可视化</span>
+      </template>
+      <el-menu-item index="/bigscreen">
+        <i class="el-icon-view"></i>
+        <span slot="title">大屏管理</span>
+      </el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 
