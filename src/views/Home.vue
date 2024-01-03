@@ -16,9 +16,6 @@ export default {
     }
   },
   mounted() {
-    var chartDom = document.getElementById('main');
-    var myChart = echarts.init(chartDom);
-    var option;
 
     option = {
       title:{
@@ -28,23 +25,33 @@ export default {
       },
       xAxis: {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: ['1', '2', '3', '4', '5', '6', '7','8','9','10']
       },
       yAxis: {
         type: 'value'
       },
       series: [
         {
-          data: [150, 230, 224, 218, 135, 147, 260],
+          data: [],
           type: 'line'
         },
         {
-          data: [150, 230, 224, 218, 135, 147, 260],
+          data: [],
           type: 'bar'
         }
       ]
     };
-    option && myChart.setOption(option);
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom);
+    var option;
+    this.request.get("/echarts/statistic").then(res => {
+      // 填空
+      // option.xAxis.data = res.data.x
+      option.series[0].data = res.data
+      option.series[1].data = res.data
+      // 数据准备完毕之后再set
+      myChart.setOption(option);
+    })
 
 
     //扇形统计图
