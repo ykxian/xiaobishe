@@ -2,7 +2,7 @@
   <div>
     <div style="margin: 10px 0">
       <el-input style="width: 200px" placeholder="请输入ID" suffix-icon="el-icon-search" v-model="id"></el-input>
-      <el-input style="width: 200px" placeholder="请输入名称" suffix-icon="el-icon-message" class="ml-5" v-model="名称"></el-input>
+      <el-input style="width: 200px" placeholder="请输入名称" suffix-icon="el-icon-message" class="ml-5" v-model="dName"></el-input>
       <el-button class="ml-5" type="primary" @click="load">搜索</el-button>
       <el-button type="warning" @click="reset">重置</el-button>
     </div>
@@ -12,8 +12,7 @@
       <el-popconfirm
           class="ml-5"
           confirm-button-text='确定'
-          cancel-button-text='我再想
-          想'
+          cancel-button-text='我再想想'
           icon="el-icon-info"
           icon-color="red"
           title="您确定批量删除这些数据吗？"
@@ -21,8 +20,7 @@
       >
         <el-button type="danger" slot="reference">批量删除 <i class="el-icon-remove-outline"></i></el-button>
       </el-popconfirm>
-      <el-button type="primary" class="ml-5">导入 <i class="el-icon-bottom"></i></el-button>
-      <el-button type="primary" @click="handleExport">导出 <i class="el-icon-top"></i></el-button>
+      <el-button style="margin:5px" type="primary" @click="handleExport">导出 <i class="el-icon-top"></i></el-button>
     </div>
 
     <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"  @selection-change="handleSelectionChange">
@@ -130,16 +128,17 @@ export default {
           type: this.type
         }
       }).then(res => {
-        console.log(res.records)
+        //console.log(res.records)
 
         this.tableData = res.records
+        this.total = res.total
+        //console.log("total="+res.records.length)
         //根据type数字显示设备类型
-
-        // this.tableData.type=t[res.records.type-1]
        this.tableData.forEach(device=>{
          device.typeString =this.getTypeString(device.type);
+
        })
-        this.total = res.total
+
       })
     },
     getTypeString(type){
