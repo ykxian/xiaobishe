@@ -29,7 +29,7 @@
       <el-table-column prop="dName" label="名称" width="140"></el-table-column>
       <el-table-column prop="typeString" label="类型" width="120"></el-table-column>
       <el-table-column prop="online" label="在线状态" width="120">在线</el-table-column>
-      <el-table-column prop="waringString" label="报警状态" width="120"></el-table-column>
+      <el-table-column prop="warningString" label="报警状态" width="120"></el-table-column>
       <el-table-column prop="addressString" label="所在城市" width="120"></el-table-column>
       <el-table-column label="操作"   align="center">
         <template slot-scope="scope">
@@ -47,7 +47,7 @@
           </el-popconfirm>
           <template>
           <el-button type="primary" @click="handleView(scope.row)" style="margin: 5px">查看 <i class="el-icon-view"></i></el-button>
-            <el-dialog title="测试" :visible.sync="showDialog" @opened="open">
+            <el-dialog  :visible.sync="showDialog" @opened="open">
               <div ref="zhe" style="width: 600px; height: 400px;"></div>
             </el-dialog>
           </template>
@@ -120,7 +120,7 @@ export default {
       type:"",
       typeString:"",
       online:"在线",
-      isWaring:"",
+      isWarning:"",
       warningString:"",
       address:"",
       addressString:"",
@@ -207,20 +207,15 @@ export default {
           id: this.id,
           dName: this.dName,
           type: this.type,
-          // address:this.address,
-          // isWarning:this.isWarning
         }
       }).then(res => {
-        console.log("res=")
-        console.log(res)
-
         this.tableData = res.records
         this.total = res.total
         //根据type数字显示设备类型
        this.tableData.forEach(device=>{
          device.typeString =this.getTypeString(device.type);
          device.addressString =this.getCityString(device.address);
-         device.warningString=this.getWaringString(device.isWaring)
+         device.warningString=this.getWaringString(device.isWarning)
        })
 
       })
@@ -231,8 +226,8 @@ export default {
     getCityString(address){
       return this.ci[address-1];
     },
-    getWaringString(isWaring){
-      return isWaring?"正常":"报警"
+    getWaringString(isWarning){
+      return !isWarning?"正常":"报警"
     },
     save() {
       this.request.post("/device", this.form).then(res => {
