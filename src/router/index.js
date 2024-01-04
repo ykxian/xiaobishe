@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from "@/store";
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import BigScreen from '@/views/BigScreen'
 
 Vue.use(VueRouter)
 
@@ -13,8 +14,8 @@ const routes = [
     redirect: "/home",
     children: [
       { path: 'home', name: '首页', component: () => import('../views/Home.vue')},
-      { path: 'device', name: '设备管理', component: () => import('../views/Device.vue')},
-      { path: 'bigscreen', name: '大屏管理', component: () => import('../views/BigScreen.vue')}
+      { path: 'device', name: '设备管理', component: () => import('../views/Device.vue')}
+      //{ path: 'bigscreen', name: '大屏管理', component: () => import('../views/BigScreen.vue')}
     ]
   },
   {
@@ -31,6 +32,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/bigscreen',
+    name: 'BigScreen',
+    component: BigScreen
   }
 ]
 

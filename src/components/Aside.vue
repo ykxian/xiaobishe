@@ -32,7 +32,7 @@
         <i class="el-icon-monitor"></i>
         <span slot="title">数据可视化</span>
       </template>
-      <el-menu-item index="/bigscreen">
+      <el-menu-item index="/bigscreen" @click.native="goToBigScreen">
         <i class="el-icon-view"></i>
         <span slot="title">大屏管理</span>
       </el-menu-item>
@@ -46,6 +46,11 @@ export default {
   props: {
     isCollapse: Boolean,
     logoTextShow: Boolean
+  },
+  methods: {
+    goToBigScreen() {
+      this.$router.push('/bigscreen');
+    }
   }
 }
 </script>
