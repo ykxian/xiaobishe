@@ -42,7 +42,21 @@
           >
             <el-button type="danger" slot="reference">删除 <i class="el-icon-remove-outline"></i></el-button>
           </el-popconfirm>
+          <template>
           <el-button type="primary" @click="handleView(scope.row)" style="margin: 5px">查看 <i class="el-icon-view"></i></el-button>
+            <el-dialog title="测试" :visible.sync="showDialog" @opened="open">
+              <div ref="zhe" style="width: 600px; height: 400px;"></div>
+            </el-dialog>
+          </template>
+<!--          <el-popover-->
+<!--              placement="right"-->
+<!--              width="400"-->
+<!--              trigger="click"-->
+<!--              style="margin: 5px"-->
+<!--          >-->
+<!--            <div id="zhe" style="width: 500px;height:400px;">123</div>-->
+<!--            <el-button type="primary" slot="reference">查看<i class="el-icon-view"></i></el-button>-->
+<!--          </el-popover>-->
         </template>
       </el-table-column>
     </el-table>
@@ -86,6 +100,7 @@
 </template>
 
 <script>
+import * as echarts from 'echarts';
 export default {
   name: "Device",
   data() {
@@ -101,6 +116,7 @@ export default {
       typeString:"",
       form: {},
       dialogFormVisible: false,
+      showDialog:false,
       multipleSelection: [],
       // 设备类型下拉菜单
       options: [{
@@ -112,7 +128,48 @@ export default {
       }, {
         value: '3',
         label: '光照型设备'
-      }]
+      }],
+      chartoptions:{
+        tooltip:  {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['温度', '湿度', '光照']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        title:{
+          text:'查看设备',
+          subtext: '数据分析',
+          left:'center'
+        },
+        xAxis: {
+          type: 'category',
+          data: ['1', '2', '3', '4', '5', '6', '7','8','9','10']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: [],
+            type: 'line'
+          },
+          {
+            data: [],
+            type: 'bar'
+          }
+        ]
+      }
     }
   },
   created() {
@@ -210,7 +267,41 @@ export default {
         window.open("http://localhost:80/device/export")
     },
     handleView(row){
-      this.$message.success("测试"+row.typeString)
+      this.$message.success("查看"+row.typeString+row.dName)
+      // 弹框的触发事件
+        this.showDialog = true;
+
+    },
+    open(){
+      this.$nextTick(() => {
+        //let diameter= document.getElementById("diameter");//放置echarts图示的div的id
+        //let diameterOption = {...};
+        //echarts.init(diameter).setOption(diameterOption);
+        //扇形统计图
+        // var chartDom = document.getElementById('zhe');
+        // var myChart = echarts.init(chartDom);
+        // myChart.resize()
+        // var pieoption;
+        // myChart.setOption(pieoption);
+
+        //清除
+        this.$refs.zhe.removeAttribute("_echarts_instance_")
+        //this.zhe.clear()
+        this.chartoptions.series[0].data = []
+        this.chartoptions.series[1].data = []
+        this.zhe=echarts.init(this.$refs.zhe)
+
+        this.request.get("/echarts/statistic").then(res => {
+          // 填空
+          // option.xAxis.data = res.data.x
+          this.chartoptions.series[0].data = res.data
+          this.chartoptions.series[1].data = res.data
+          // 数据准备完毕之后再set
+          this.zhe.setOption(this.chartoptions,true);
+          // this.zhe.resize()
+        })
+        // this.zhe.setOption(this.chartoptions)
+      })
     }
   }
 }

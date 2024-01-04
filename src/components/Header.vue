@@ -13,7 +13,7 @@
       <el-dropdown-menu slot="dropdown" style="width: 100px; text-align: center">
         <el-dropdown-item style="font-size: 14px; padding: 5px 0">
 <!--          <router-link to="/home">个人信息</router-link>-->
-          <span style="text-decoration: none" @click="personinfo">个人信息</span>
+<!--          <span style="text-decoration: none" @click="personinfo">个人信息</span>-->
         </el-dropdown-item>
         <el-dropdown-item style="font-size: 14px; padding: 5px 0">
           <span style="text-decoration: none" @click="logout">退出</span>
@@ -45,9 +45,6 @@ export default {
       this.$router.push("/login")
       localStorage.removeItem("user")
       this.$message.success("退出成功")
-    },
-    personinfo(){
-
     }
   }
 }
