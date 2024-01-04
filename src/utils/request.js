@@ -1,6 +1,6 @@
 import axios from 'axios'
 import ElementUI from "element-ui";
-
+import router  from "@/router/index"
 const request = axios.create({
     baseURL: 'http://localhost:80',
     timeout: 5000
@@ -40,7 +40,9 @@ request.interceptors.response.use(
                 message: res.msg,
                 type: 'error'
             });
+            router.push('/login')//回登陆界面
         }
+
         return res;
     },
     error => {
