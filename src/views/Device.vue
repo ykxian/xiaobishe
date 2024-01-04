@@ -28,6 +28,9 @@
       <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="dName" label="名称" width="140"></el-table-column>
       <el-table-column prop="typeString" label="类型" width="120"></el-table-column>
+      <el-table-column prop="online" label="在线状态" width="120">在线</el-table-column>
+      <el-table-column prop="waringString" label="报警状态" width="120"></el-table-column>
+      <el-table-column prop="addressString" label="所在城市" width="120"></el-table-column>
       <el-table-column label="操作"   align="center">
         <template slot-scope="scope">
           <el-button type="success" @click="handleEdit(scope.row)">编辑 <i class="el-icon-edit"></i></el-button>
@@ -48,15 +51,6 @@
               <div ref="zhe" style="width: 600px; height: 400px;"></div>
             </el-dialog>
           </template>
-<!--          <el-popover-->
-<!--              placement="right"-->
-<!--              width="400"-->
-<!--              trigger="click"-->
-<!--              style="margin: 5px"-->
-<!--          >-->
-<!--            <div id="zhe" style="width: 500px;height:400px;">123</div>-->
-<!--            <el-button type="primary" slot="reference">查看<i class="el-icon-view"></i></el-button>-->
-<!--          </el-popover>-->
         </template>
       </el-table-column>
     </el-table>
@@ -90,6 +84,16 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="所在城市">
+          <el-select v-model="form.type" placeholder="请选择">
+            <el-option
+                v-for="item in cityoptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="danger" @click="dialogFormVisible = false">取 消</el-button>
@@ -106,6 +110,7 @@ export default {
   data() {
     return {
       t:["温度型设备","湿度型设备","光照型设备"],
+      ci:["北京","上海","深圳","广州"],
       tableData: [],
       total: 0,
       pageNum: 1,
@@ -114,6 +119,11 @@ export default {
       dName: "",
       type:"",
       typeString:"",
+      online:"在线",
+      isWaring:"",
+      warningString:"",
+      address:"",
+      addressString:"",
       form: {},
       dialogFormVisible: false,
       showDialog:false,
@@ -128,6 +138,19 @@ export default {
       }, {
         value: '3',
         label: '光照型设备'
+      }],
+      cityoptions: [{
+        value: '1',
+        label: '北京'
+      }, {
+        value: '2',
+        label: '上海'
+      }, {
+        value: '3',
+        label: '广州'
+      },{
+        value: '3',
+        label: '深圳'
       }],
       chartoptions:{
         tooltip:  {
@@ -191,17 +214,23 @@ export default {
 
         this.tableData = res.records
         this.total = res.total
-        //console.log("total="+res.records.length)
         //根据type数字显示设备类型
        this.tableData.forEach(device=>{
          device.typeString =this.getTypeString(device.type);
-
+         device.cityString =this.getCityString(device.city);
+         device.warningString=this.getWaringString(device.isWaring)
        })
 
       })
     },
     getTypeString(type){
       return this.t[type-1];
+    },
+    getCityString(address){
+      return this.ci[address-1];
+    },
+    getWaringString(isWaring){
+      return isWaring?"正常":"报警"
     },
     save() {
       this.request.post("/device", this.form).then(res => {
@@ -274,16 +303,6 @@ export default {
     },
     open(){
       this.$nextTick(() => {
-        //let diameter= document.getElementById("diameter");//放置echarts图示的div的id
-        //let diameterOption = {...};
-        //echarts.init(diameter).setOption(diameterOption);
-        //扇形统计图
-        // var chartDom = document.getElementById('zhe');
-        // var myChart = echarts.init(chartDom);
-        // myChart.resize()
-        // var pieoption;
-        // myChart.setOption(pieoption);
-
         //清除
         this.$refs.zhe.removeAttribute("_echarts_instance_")
         //this.zhe.clear()
@@ -300,7 +319,6 @@ export default {
           this.zhe.setOption(this.chartoptions,true);
           // this.zhe.resize()
         })
-        // this.zhe.setOption(this.chartoptions)
       })
     }
   }
