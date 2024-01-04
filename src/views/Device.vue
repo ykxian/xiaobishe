@@ -85,7 +85,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="所在城市">
-          <el-select v-model="form.type" placeholder="请选择">
+          <el-select v-model="form.address" placeholder="请选择">
             <el-option
                 v-for="item in cityoptions"
                 :key="item.value"
@@ -149,7 +149,7 @@ export default {
         value: '3',
         label: '广州'
       },{
-        value: '3',
+        value: '4',
         label: '深圳'
       }],
       chartoptions:{
@@ -206,7 +206,9 @@ export default {
           pageSize: this.pageSize,
           id: this.id,
           dName: this.dName,
-          type: this.type
+          type: this.type,
+          // address:this.address,
+          // isWarning:this.isWarning
         }
       }).then(res => {
         console.log("res=")
@@ -217,7 +219,7 @@ export default {
         //根据type数字显示设备类型
        this.tableData.forEach(device=>{
          device.typeString =this.getTypeString(device.type);
-         device.cityString =this.getCityString(device.city);
+         device.addressString =this.getCityString(device.address);
          device.warningString=this.getWaringString(device.isWaring)
        })
 
