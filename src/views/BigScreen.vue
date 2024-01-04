@@ -13,14 +13,10 @@
         <img class="full-img" @click="showFullScreen" src="@/assets/fullscreen.png" alt="">
       </div>
       <div class="header-city">
-        <p>全国用户分布大屏</p>
+        <p>设备数据大屏</p>
         <dv-decoration-5 style="width:300px;height:40px;" />
       </div>
       <div class="right">
-        <div>
-          <p :class="{'active': active === 2}" @click="handleChangeType(2)">用户分析</p>
-          <p :class="{'active': active === 1}" @click="handleChangeType(1)">设备统计</p>
-        </div>
         <dv-decoration-3 style="width:250px;height:30px;" />
       </div>
     </header>
@@ -95,7 +91,7 @@ export default {
   components: { UserDataPreview, DeviceDataPreview },
   data () {
     return {
-      active: 2,
+      active: 1,
       isLoading: false,
       fullscreen: false,
       height: '',
@@ -144,23 +140,16 @@ export default {
           id: 'u-iotdoor',
           name: '全国社区设备总量',
           value: this.formatter(cityData.data.iotdoorControlCount),
-          valueArr: this.formatter(cityData.data.iotdoorControlCount).split(''),
-          type: cityData.data.iotdoorControlCountUpType,
-          percentage: `${(cityData.data.iotdoorControlCountPercentage * 100).toFixed(1)} %`
-        }, {
-          id: 'u-community',
-          name: '全国核心城市',
-          value: this.formatter(cityData.data.cityCount),
-          valueArr: this.formatter(cityData.data.cityCount).split(''),
-          type: cityData.data.cityCountUpType,
-          percentage: `${(cityData.data.cityCountPercentage * 100).toFixed(1)}%`
+          valueArr: this.formatter(cityData.data.iotdoorControlCount).split('')
+          // type: cityData.data.iotdoorControlCountUpType,
+          // percentage: `${(cityData.data.iotdoorControlCountPercentage * 100).toFixed(1)} %`
         }, {
           id: 'u-city',
-          name: '全国住宅社区',
+          name: '全国设备地区',
           value: this.formatter(cityData.data.communityCount),
-          valueArr: this.formatter(cityData.data.communityCount).split(''),
-          type: cityData.data.communityCountUpType,
-          percentage: `${(cityData.data.communityCountPercentage * 100).toFixed(1)}%`
+          valueArr: this.formatter(cityData.data.communityCount).split('')
+          // type: cityData.data.communityCountUpType,
+          // percentage: `${(cityData.data.communityCountPercentage * 100).toFixed(1)}%`
         })
         this.timedRefresh(this.cityInfoList, 'city')
         cityData.data.cityList.sort((a, b) => {

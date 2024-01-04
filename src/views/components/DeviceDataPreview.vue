@@ -24,7 +24,6 @@
       </div>
       <!-- 数量排行 -->
       <div ref="scrollTable" class="quantity-ranking">
-        <p class="content-title">城市设备排行Top20</p>
         <ScrollTable class="scroll-table" :config="deviceConfig" />
       </div>
     </div>
