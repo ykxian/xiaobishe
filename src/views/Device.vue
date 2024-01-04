@@ -207,7 +207,7 @@ export default {
       this.load()
     },
     handleExport(){
-        window.open("http://localhost:80/device/export")
+        window.open("http://localhost:80/echarts/export")
     },
     handleView(row){
       this.$message.success("测试"+row.typeString)

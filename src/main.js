@@ -7,6 +7,7 @@ import './assets/globle.css'
 import store from "@/store";
 import request from "./utils/request";
 import './utils/mixins'
+import * as echarts from 'echarts'
 
 import {
   loading,
@@ -27,6 +28,8 @@ Vue.use(activeRingChart)
 Vue.config.productionTip = false
 Vue.use(ElementUI,{size:"small"})
 Vue.prototype.request=request
+Vue.prototype.$echarts = echarts
+
 new Vue({
   router,
   store,
