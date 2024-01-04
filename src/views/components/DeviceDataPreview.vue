@@ -30,19 +30,13 @@
     <!-- 右侧设备占比 -->
     <div class="data-proportion right-layout">
       <div class="real-time-Warning" :style="{'height': $parent.fullscreen ? height : '315px'}">
-        <p class="content-title">实时预警</p>
+        <p class="content-title">设备报警</p>
         <ScrollTable v-if="isShow" class="scroll-table" :config="deviceWarningConfig" />
       </div>
       <div class="proportion-type" :style="{'height': $parent.fullscreen ? height : '250px'}">
         <p class="content-title">设备类型占比</p>
         <div>
           <div id="proportionType" style="height: 230px"></div>
-        </div>
-      </div>
-      <div class="model-type" :style="{'height': $parent.fullscreen ? height : '250px'}">
-        <p class="content-title">人脸广告机型号占比</p>
-        <div>
-          <div id="modelType" style="height: 230px"></div>
         </div>
       </div>
     </div>
@@ -180,13 +174,13 @@ export default {
       deviceWarningData.data.realTimeWarningVOList && deviceWarningData.data.realTimeWarningVOList.length && deviceWarningData.data.realTimeWarningVOList.length > 0 && deviceWarningData.data.realTimeWarningVOList.forEach((t, index) => {
         if (index < 15) {
           deviceWarningConfigData.push(
-            [`<span style="color: #DA3924">设备离线</span>`, `<span style="color:#4A90E2;">${t.communtiyName}</span>`, 
-            `<span style="color:#ccc;">${t.doorControlName} </span>`, `<span style="color:#ccc;">${t.realTime} </span>`]
+            [`<span style="color: #DA3924">设备报警</span>`, `<span style="color:#4A90E2;">${t.communtiyName}</span>`, 
+            `<span style="color:#ccc;">${t.doorControlName} </span>`]
           )
         }
       })
       this.deviceWarningConfig = {
-        header: ['预警', '小区', '设备', '离线时间'],
+        header: ['报警', '地区', '设备'],
         data: deviceWarningConfigData,
         rowNum: 6,
         waitTime: 2000,
@@ -199,12 +193,12 @@ export default {
     initDeviceProportionType () {
       if (deviceTypeData.code !== 0) return
       let optionData = [
-        {value: deviceTypeData.data.iotDoorControlCount || 0, name: '互联网门禁'},
-        {value: deviceTypeData.data.faceCount || 0, name: '人脸设备'},
-        {value: deviceTypeData.data.faceDoorControlCount || 0, name: '人脸门禁机'},
-        {value: deviceTypeData.data.faceDoorControlByadvertiseCount || 0, name: '人脸门禁广告机'},
-        {value: deviceTypeData.data.offlineByadvertiseCount || 0, name: '线下广告&门禁机'},
-        {value: deviceTypeData.data.offlineByadvertiseDoorCount, name: '人脸广告门'}
+        {value: deviceTypeData.data.iotDoorControlCount || 0, name: '温度型设备'},
+        {value: deviceTypeData.data.faceCount || 0, name: '湿度型设备'},
+        {value: deviceTypeData.data.faceDoorControlCount || 0, name: '光照型设备'}
+        // {value: deviceTypeData.data.faceDoorControlByadvertiseCount || 0, name: '人脸门禁广告机'},
+        // {value: deviceTypeData.data.offlineByadvertiseCount || 0, name: '线下广告&门禁机'},
+        // {value: deviceTypeData.data.offlineByadvertiseDoorCount, name: '人脸广告门'}
       ]
       let myChart = this.$echarts.init(document.getElementById('proportionType'))
       let option = {
@@ -212,7 +206,7 @@ export default {
           trigger: 'item',
           backgroundColor: 'rgba(74, 144, 226, 0.84)',
           formatter: (params) => {
-            return `<div>${params.seriesName} <br> ${params.data.name}：${this.$parent.formatter(params.data.value)} (${params.percent}%)</div>`
+            return `<div>${params.seriesName} <br> ${params.data.name}: ${this.$parent.formatter(params.data.value)} (${params.percent}%)</div>`
           }
         },
         legend: {

@@ -71,9 +71,9 @@
           <canvas id="cityPopover" width="120px" height="120px"></canvas>
         </div>
         <div>
-          <p>开门用户 &nbsp; {{bubbleData.openUserCount}}</p>
+          <!-- <p>开门用户 &nbsp; {{bubbleData.openUserCount}}</p> -->
           <p>设备总数 &nbsp; {{bubbleData.iotDoorControlCount}}</p>
-          <p>小区总数 &nbsp; {{bubbleData.communityCount}}</p>
+          <!-- <p>小区总数 &nbsp; {{bubbleData.communityCount}}</p> -->
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@ export default {
         this.cityInfoList = []
         this.cityInfoList.push( {
           id: 'u-iotdoor',
-          name: '全国社区设备总量',
+          name: '全国设备总量',
           value: this.formatter(cityData.data.iotdoorControlCount),
           valueArr: this.formatter(cityData.data.iotdoorControlCount).split('')
           // type: cityData.data.iotdoorControlCountUpType,

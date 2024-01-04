@@ -1010,102 +1010,102 @@ export const deviceWarningData = {
         "realTimeWarningVOList": [
             {
                 "communtiyName": "深圳市南山区1", 
-                "doorControlName": "南大门1", 
+                "doorControlName": "设备1", 
                 "realTime": "10:58"
             }, 
             {
                 "communtiyName": "深圳市南山区2", 
-                "doorControlName": "南大门2", 
+                "doorControlName": "设备2", 
                 "realTime": "10:55"
             }, 
             {
                 "communtiyName": "深圳市南山区3", 
-                "doorControlName": "南大门3", 
+                "doorControlName": "设备3", 
                 "realTime": "10:55"
             }, 
             {
                 "communtiyName": "深圳市南山区4", 
-                "doorControlName": "南大门4", 
+                "doorControlName": "设备4", 
                 "realTime": "10:55"
             }, 
             {
                 "communtiyName": "深圳市南山区5", 
-                "doorControlName": "南大门5", 
+                "doorControlName": "设备5", 
                 "realTime": "10:55"
             }, 
             {
                 "communtiyName": "深圳市南山区6", 
-                "doorControlName": "南大门6", 
+                "doorControlName": "设备6", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区7", 
-                "doorControlName": "南大门7", 
+                "doorControlName": "设备7", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区8", 
-                "doorControlName": "南大门8", 
+                "doorControlName": "设备8", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区9", 
-                "doorControlName": "南大门9", 
+                "doorControlName": "设备9", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区10", 
-                "doorControlName": "南大门10", 
+                "doorControlName": "设备10", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区11", 
-                "doorControlName": "南大门11", 
+                "doorControlName": "设备11", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区12", 
-                "doorControlName": "南大门12", 
+                "doorControlName": "设备12", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区13", 
-                "doorControlName": "南大门13", 
+                "doorControlName": "设备13", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区14", 
-                "doorControlName": "南大门14", 
+                "doorControlName": "设备14", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区15", 
-                "doorControlName": "南大门15", 
+                "doorControlName": "设备15", 
                 "realTime": "10:54"
             }, 
             {
                 "communtiyName": "深圳市南山区16", 
-                "doorControlName": "南大门16", 
+                "doorControlName": "设备16", 
                 "realTime": "10:53"
             }, 
             {
                 "communtiyName": "深圳市南山区17", 
-                "doorControlName": "南大门17", 
+                "doorControlName": "设备17", 
                 "realTime": "10:53"
             }, 
             {
                 "communtiyName": "深圳市南山区18", 
-                "doorControlName": "南大门18", 
+                "doorControlName": "设备18", 
                 "realTime": "10:53"
             }, 
             {
                 "communtiyName": "深圳市南山区19", 
-                "doorControlName": "南大门19", 
+                "doorControlName": "设备19", 
                 "realTime": "10:53"
             }, 
             {
                 "communtiyName": "深圳市南山区20", 
-                "doorControlName": "南大门20", 
+                "doorControlName": "设备20", 
                 "realTime": "10:53"
             }
         ]
