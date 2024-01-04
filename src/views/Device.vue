@@ -28,6 +28,9 @@
       <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="dName" label="名称" width="140"></el-table-column>
       <el-table-column prop="typeString" label="类型" width="120"></el-table-column>
+      <el-table-column prop="online" label="在线状态" width="120">在线</el-table-column>
+      <el-table-column prop="waringString" label="报警状态" width="120"></el-table-column>
+      <el-table-column prop="addressString" label="所在城市" width="120"></el-table-column>
       <el-table-column label="操作"   align="center">
         <template slot-scope="scope">
           <el-button type="success" @click="handleEdit(scope.row)">编辑 <i class="el-icon-edit"></i></el-button>
@@ -42,7 +45,12 @@
           >
             <el-button type="danger" slot="reference">删除 <i class="el-icon-remove-outline"></i></el-button>
           </el-popconfirm>
+          <template>
           <el-button type="primary" @click="handleView(scope.row)" style="margin: 5px">查看 <i class="el-icon-view"></i></el-button>
+            <el-dialog title="测试" :visible.sync="showDialog" @opened="open">
+              <div ref="zhe" style="width: 600px; height: 400px;"></div>
+            </el-dialog>
+          </template>
         </template>
       </el-table-column>
     </el-table>
@@ -76,6 +84,16 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="所在城市">
+          <el-select v-model="form.type" placeholder="请选择">
+            <el-option
+                v-for="item in cityoptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="danger" @click="dialogFormVisible = false">取 消</el-button>
@@ -86,11 +104,13 @@
 </template>
 
 <script>
+import * as echarts from 'echarts';
 export default {
   name: "Device",
   data() {
     return {
       t:["温度型设备","湿度型设备","光照型设备"],
+      ci:["北京","上海","深圳","广州"],
       tableData: [],
       total: 0,
       pageNum: 1,
@@ -99,8 +119,14 @@ export default {
       dName: "",
       type:"",
       typeString:"",
+      online:"在线",
+      isWaring:"",
+      warningString:"",
+      address:"",
+      addressString:"",
       form: {},
       dialogFormVisible: false,
+      showDialog:false,
       multipleSelection: [],
       // 设备类型下拉菜单
       options: [{
@@ -112,7 +138,61 @@ export default {
       }, {
         value: '3',
         label: '光照型设备'
-      }]
+      }],
+      cityoptions: [{
+        value: '1',
+        label: '北京'
+      }, {
+        value: '2',
+        label: '上海'
+      }, {
+        value: '3',
+        label: '广州'
+      },{
+        value: '3',
+        label: '深圳'
+      }],
+      chartoptions:{
+        tooltip:  {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['温度', '湿度', '光照']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        title:{
+          text:'查看设备',
+          subtext: '数据分析',
+          left:'center'
+        },
+        xAxis: {
+          type: 'category',
+          data: ['1', '2', '3', '4', '5', '6', '7','8','9','10']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            data: [],
+            type: 'line'
+          },
+          {
+            data: [],
+            type: 'bar'
+          }
+        ]
+      }
     }
   },
   created() {
@@ -134,17 +214,23 @@ export default {
 
         this.tableData = res.records
         this.total = res.total
-        //console.log("total="+res.records.length)
         //根据type数字显示设备类型
        this.tableData.forEach(device=>{
          device.typeString =this.getTypeString(device.type);
-
+         device.cityString =this.getCityString(device.city);
+         device.warningString=this.getWaringString(device.isWaring)
        })
 
       })
     },
     getTypeString(type){
       return this.t[type-1];
+    },
+    getCityString(address){
+      return this.ci[address-1];
+    },
+    getWaringString(isWaring){
+      return isWaring?"正常":"报警"
     },
     save() {
       this.request.post("/device", this.form).then(res => {
@@ -210,7 +296,30 @@ export default {
         window.open("http://localhost:80/echarts/export")
     },
     handleView(row){
-      this.$message.success("测试"+row.typeString)
+      this.$message.success("查看"+row.typeString+row.dName)
+      // 弹框的触发事件
+        this.showDialog = true;
+
+    },
+    open(){
+      this.$nextTick(() => {
+        //清除
+        this.$refs.zhe.removeAttribute("_echarts_instance_")
+        //this.zhe.clear()
+        this.chartoptions.series[0].data = []
+        this.chartoptions.series[1].data = []
+        this.zhe=echarts.init(this.$refs.zhe)
+
+        this.request.get("/echarts/statistic").then(res => {
+          // 填空
+          // option.xAxis.data = res.data.x
+          this.chartoptions.series[0].data = res.data
+          this.chartoptions.series[1].data = res.data
+          // 数据准备完毕之后再set
+          this.zhe.setOption(this.chartoptions,true);
+          // this.zhe.resize()
+        })
+      })
     }
   }
 }
