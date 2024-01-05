@@ -740,10 +740,10 @@ export const cityData = {
               "openUserCount": 3787
           }
       ], 
-      "communityCount": 18871, 
+      "communityCount": 14, 
       "communityCountPercentage": "0.072", 
       "communityCountUpType": 0, 
-      "iotdoorControlCount": 121971, 
+      "iotdoorControlCount": 563, 
       "iotdoorControlCountPercentage": "0.033", 
       "iotdoorControlCountUpType": 0, 
       "userCommunity": 14973586, 
@@ -911,8 +911,8 @@ export const userChannelData = {
 export const deviceStateData = {
     "code": 0, 
     "data": {
-        "offLineDoorControl": 3525, 
-        "onLineDoorControl": 86710
+        "offLineDoorControl": 3, 
+        "onLineDoorControl": 153
     }, 
     "message": "success"
 }
@@ -923,80 +923,32 @@ export const deviceSortData = {
     "data": {
         "cityDoorControlVOList": [
             {
-                "cityName": "上海市市辖区", 
-                "iotCount": 3133971
+                "cityName": "上海市", 
+                "iotCount": 123
             }, 
             {
                 "cityName": "成都市", 
-                "iotCount": 1893330
+                "iotCount": 189
             }, 
             {
-                "cityName": "重庆市市辖区", 
-                "iotCount": 621178
+                "cityName": "重庆市", 
+                "iotCount": 621
             }, 
             {
                 "cityName": "深圳市", 
-                "iotCount": 5564436
+                "iotCount": 556
             }, 
             {
                 "cityName": "广州市", 
-                "iotCount": 1455230
+                "iotCount": 145
             }, 
             {
-                "cityName": "北京市市辖区", 
-                "iotCount": 113763
+                "cityName": "北京市", 
+                "iotCount": 113
             }, 
             {
                 "cityName": "郑州市", 
-                "iotCount": 332394
-            }, 
-            {
-                "cityName": "福州市", 
-                "iotCount": 11904
-            }, 
-            {
-                "cityName": "南京市", 
-                "iotCount": 22718
-            }, 
-            {
-                "cityName": "沈阳市", 
-                "iotCount": 12550
-            }, 
-            {
-                "cityName": "常州市", 
-                "iotCount": 13454
-            }, 
-            {
-                "cityName": "石家庄市", 
-                "iotCount": 22415
-            }, 
-            {
-                "cityName": "武汉市", 
-                "iotCount": 15358
-            }, 
-            {
-                "cityName": "长沙市", 
-                "iotCount": 16313
-            }, 
-            {
-                "cityName": "西宁市", 
-                "iotCount": 12288
-            }, 
-            {
-                "cityName": "苏州市", 
-                "iotCount": 21235
-            }, 
-            {
-                "cityName": "扬州市", 
-                "iotCount": 33234
-            }, 
-            {
-                "cityName": "南充市", 
-                "iotCount": 33216
-            }, 
-            {
-                "cityName": "珠海市", 
-                "iotCount": 114193
+                "iotCount": 332
             }
         ]
     }, 
@@ -1009,104 +961,29 @@ export const deviceWarningData = {
     "data": {
         "realTimeWarningVOList": [
             {
-                "communtiyName": "深圳市南山区1", 
-                "doorControlName": "设备1", 
+                "communtiyName": "北京市", 
+                "doorControlName": "device1", 
                 "realTime": "10:58"
             }, 
             {
-                "communtiyName": "深圳市南山区2", 
-                "doorControlName": "设备2", 
+                "communtiyName": "深圳市", 
+                "doorControlName": "device2", 
+                "realTime": "10:58"
+            }, 
+            {
+                "communtiyName": "广州市", 
+                "doorControlName": "device3", 
                 "realTime": "10:55"
             }, 
             {
-                "communtiyName": "深圳市南山区3", 
-                "doorControlName": "设备3", 
+                "communtiyName": "西安市", 
+                "doorControlName": "device4", 
                 "realTime": "10:55"
             }, 
             {
-                "communtiyName": "深圳市南山区4", 
-                "doorControlName": "设备4", 
+                "communtiyName": "上海市", 
+                "doorControlName": "device5", 
                 "realTime": "10:55"
-            }, 
-            {
-                "communtiyName": "深圳市南山区5", 
-                "doorControlName": "设备5", 
-                "realTime": "10:55"
-            }, 
-            {
-                "communtiyName": "深圳市南山区6", 
-                "doorControlName": "设备6", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区7", 
-                "doorControlName": "设备7", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区8", 
-                "doorControlName": "设备8", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区9", 
-                "doorControlName": "设备9", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区10", 
-                "doorControlName": "设备10", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区11", 
-                "doorControlName": "设备11", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区12", 
-                "doorControlName": "设备12", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区13", 
-                "doorControlName": "设备13", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区14", 
-                "doorControlName": "设备14", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区15", 
-                "doorControlName": "设备15", 
-                "realTime": "10:54"
-            }, 
-            {
-                "communtiyName": "深圳市南山区16", 
-                "doorControlName": "设备16", 
-                "realTime": "10:53"
-            }, 
-            {
-                "communtiyName": "深圳市南山区17", 
-                "doorControlName": "设备17", 
-                "realTime": "10:53"
-            }, 
-            {
-                "communtiyName": "深圳市南山区18", 
-                "doorControlName": "设备18", 
-                "realTime": "10:53"
-            }, 
-            {
-                "communtiyName": "深圳市南山区19", 
-                "doorControlName": "设备19", 
-                "realTime": "10:53"
-            }, 
-            {
-                "communtiyName": "深圳市南山区20", 
-                "doorControlName": "设备20", 
-                "realTime": "10:53"
             }
         ]
     }, 

@@ -123,10 +123,10 @@ export default {
       })
       this.$parent.timedRefresh(this.doorStates, 'device')
       let data = [{
-        name: '设备在线率',
+        name: '在线率',
         value: deviceStateData.data.onLineDoorControl
       }, {
-        name: '设备离线率',
+        name: '离线率',
         value: deviceStateData.data.offLineDoorControl
       }]
       this.deviceSateConfig = {
