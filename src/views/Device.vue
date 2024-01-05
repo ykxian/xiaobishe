@@ -47,7 +47,7 @@
           </el-popconfirm>
           <template>
           <el-button type="primary" @click="handleView(scope.row)" style="margin: 5px">查看 <i class="el-icon-view"></i></el-button>
-            <el-dialog  :visible.sync="showDialog" @opened="open">
+            <el-dialog  :visible.sync="showDialog" @open="open(scope.row)">
               <div ref="zhe" style="width: 600px; height: 400px;"></div>
             </el-dialog>
           </template>
@@ -124,6 +124,7 @@ export default {
       warningString:"",
       address:"",
       addressString:"",
+      currRow:"",
       form: {},
       dialogFormVisible: false,
       showDialog:false,
@@ -295,10 +296,11 @@ export default {
     handleView(row){
       this.$message.success("查看"+row.typeString+row.dName)
       // 弹框的触发事件
+        this.currRow=row
         this.showDialog = true;
-
     },
-    open(){
+    open(row){
+      if(row.id!=this.currRow.id) return {}
       this.$nextTick(() => {
         //清除
         this.$refs.zhe.removeAttribute("_echarts_instance_")
