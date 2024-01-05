@@ -44,7 +44,8 @@
 </template>
 
 <script>
-import { deviceStateData, deviceSortData, deviceWarningData, deviceTypeData, deviceAdvertiseModelData } from '../../utils/jsonData'
+import { deviceAdvertiseModelData } from '../../utils/jsonData'
+//import { deviceStateData, deviceSortData, deviceWarningData, deviceTypeData, deviceAdvertiseModelData } from '../../utils/jsonData'
 // 自定义排名轮播
 import ScrollTable from '@/components/ScrollTable/src/index'
 export default {
@@ -87,7 +88,11 @@ export default {
       cityInfoList: [],
       deviceSateConfig: {},
       deviceConfig: {},
-      deviceWarningConfig: {}
+      deviceWarningConfig: {},
+      deviceStateData: {},
+      deviceSortData: {},
+      deviceWarningData: {}, 
+      deviceTypeData: {}
     }
   },
   watch: {
@@ -97,6 +102,7 @@ export default {
     }
   },
   mounted () {
+    this.fetchData()
     this.initDeviceSateConfig()
     this.initDeviceConfig()
     this.initDeviceProportionType()
@@ -104,30 +110,38 @@ export default {
     this.initDeviceWarning()
   },
   methods: {
+    //拉取数据
+    async fetchData () {
+      const response = await this.request.get("/bigscreen/data")
+      this.deviceWarningData = response.deviceWarningData
+      this.deviceStateData = response.deviceStateData
+      this.deviceSortData = response.deviceSortData
+      this.deviceTypeData = response.deviceTypeData
+    },
     // 设备状态
     initDeviceSateConfig () {
-      if (deviceStateData.code !== 0) return
+      if (this.deviceStateData.code !== 0) return
       clearInterval(this.onlineTimer)
       this.onlineTimer = null
       this.doorStates = []
       this.doorStates.push({
         id: 'd-online',
         name: '在线',
-        value: this.$parent.formatter(deviceStateData.data.onLineDoorControl),
-        valueArr: this.$parent.formatter(deviceStateData.data.onLineDoorControl).split('')
+        value: this.$parent.formatter(this.deviceStateData.data.onLineDoorControl),
+        valueArr: this.$parent.formatter(this.deviceStateData.data.onLineDoorControl).split('')
       }, {
         id: 'd-off',
         name: '离线',
-        value: this.$parent.formatter(deviceStateData.data.offLineDoorControl),
-        valueArr: this.$parent.formatter(deviceStateData.data.offLineDoorControl).split('')
+        value: this.$parent.formatter(this.deviceStateData.data.offLineDoorControl),
+        valueArr: this.$parent.formatter(this.deviceStateData.data.offLineDoorControl).split('')
       })
       this.$parent.timedRefresh(this.doorStates, 'device')
       let data = [{
         name: '在线率',
-        value: deviceStateData.data.onLineDoorControl
+        value: this.deviceStateData.data.onLineDoorControl
       }, {
         name: '离线率',
-        value: deviceStateData.data.offLineDoorControl
+        value: this.deviceStateData.data.offLineDoorControl
       }]
       this.deviceSateConfig = {
         radius: '60%',
@@ -143,13 +157,13 @@ export default {
     // 设备排行
     initDeviceConfig () {
       const rowNum = Math.floor((this.$refs.scrollTable.offsetHeight - 50) / 42)
-      if (deviceSortData.code !== 0) return
-      if (!deviceSortData.data.cityDoorControlVOList || !deviceSortData.data.cityDoorControlVOList.length || deviceSortData.data.cityDoorControlVOList.length < 1) return
+      if (this.deviceSortData.code !== 0) return
+      if (!this.deviceSortData.data.cityDoorControlVOList || !this.deviceSortData.data.cityDoorControlVOList.length || this.deviceSortData.data.cityDoorControlVOList.length < 1) return
       let deviceConfigData = []
-      deviceSortData.data.cityDoorControlVOList.sort((a, b) => {
+      this.deviceSortData.data.cityDoorControlVOList.sort((a, b) => {
         return b.iotCount - a.iotCount
       })
-      deviceSortData.data.cityDoorControlVOList.forEach((t, index) => {
+      this.deviceSortData.data.cityDoorControlVOList.forEach((t, index) => {
         let className = ''
         index < 3 ? className = 'indexY' : className = 'indexG'
         deviceConfigData.push(
@@ -169,9 +183,9 @@ export default {
     },
     // 实时预警
     initDeviceWarning () {
-      if (deviceWarningData.code !== 0) return
+      if (this.deviceWarningData.code !== 0) return
       let deviceWarningConfigData = []
-      deviceWarningData.data.realTimeWarningVOList && deviceWarningData.data.realTimeWarningVOList.length && deviceWarningData.data.realTimeWarningVOList.length > 0 && deviceWarningData.data.realTimeWarningVOList.forEach((t, index) => {
+      this.deviceWarningData.data.realTimeWarningVOList && this.deviceWarningData.data.realTimeWarningVOList.length && this.deviceWarningData.data.realTimeWarningVOList.length > 0 && this.deviceWarningData.data.realTimeWarningVOList.forEach((t, index) => {
         if (index < 15) {
           deviceWarningConfigData.push(
             [`<span style="color: #DA3924">设备报警</span>`, `<span style="color:#4A90E2;">${t.communtiyName}</span>`, 
@@ -191,11 +205,11 @@ export default {
     },
     // 类型占比
     initDeviceProportionType () {
-      if (deviceTypeData.code !== 0) return
+      if (this.deviceTypeData.code !== 0) return
       let optionData = [
-        {value: deviceTypeData.data.iotDoorControlCount || 0, name: '温度型设备'},
-        {value: deviceTypeData.data.faceCount || 0, name: '湿度型设备'},
-        {value: deviceTypeData.data.faceDoorControlCount || 0, name: '光照型设备'}
+        {value: this.deviceTypeData.data.iotDoorControlCount || 0, name: '温度型设备'},
+        {value: this.deviceTypeData.data.faceCount || 0, name: '湿度型设备'},
+        {value: this.deviceTypeData.data.faceDoorControlCount || 0, name: '光照型设备'}
         // {value: deviceTypeData.data.faceDoorControlByadvertiseCount || 0, name: '人脸门禁广告机'},
         // {value: deviceTypeData.data.offlineByadvertiseCount || 0, name: '线下广告&门禁机'},
         // {value: deviceTypeData.data.offlineByadvertiseDoorCount, name: '人脸广告门'}
