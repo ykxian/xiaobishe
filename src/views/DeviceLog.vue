@@ -44,31 +44,32 @@ export default {
       operation:""
     }
   },
+  created() {
+    this.load()
+  },
   methods: {
     //清空日志
     clear() {
-
+      // this.request.delete("/log/clear").then(res => {
+      //   if (res) {
+      //     this.$message.success("清空成功")
+      //     this.load()
+      //   } else {
+      //     this.$message.error("清空失败")
+      //   }
+      // })
     },
     load(){
-      // this.request.get("/device/page", {
-      //   params: {
-      //     pageNum: this.pageNum,
-      //     pageSize: this.pageSize,
-      //     id: this.id,
-      //     time: this.time,
-      //     operation: this.opration,
-      //   }
-      // }).then(res => {
-      //   this.tableData = res.records
-      //   this.total = res.total
-      //   //根据type数字显示设备类型
-      //   this.tableData.forEach(device=>{
-      //     device.typeString =this.getTypeString(device.type);
-      //     device.addressString =this.getCityString(device.address);
-      //     device.warningString=this.getWaringString(device.isWarning)
-      //   })
-      //
-      // })
+      this.request.get("/log/page", {
+        params: {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize,
+          id: this.id,
+        }
+      }).then(res => {
+        this.tableData = res.records
+        this.total = res.total
+      })
     },
     handleSizeChange(pageSize) {
       this.pageSize = pageSize
