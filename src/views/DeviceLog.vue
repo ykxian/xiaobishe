@@ -45,6 +45,7 @@ export default {
     }
   },
   methods: {
+    //清空日志
     clear() {
 
     },
