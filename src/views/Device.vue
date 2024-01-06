@@ -307,7 +307,7 @@ export default {
         this.chartoptions.series[1].data = []
         this.zhe=echarts.init(this.$refs.zhe)
 
-        this.request.get("/echarts/statistic").then(res => {
+        this.request.get("/echarts/statistic/"+row.id).then(res => {
           // 填空
           // option.xAxis.data = res.data.x
           this.chartoptions.series[0].data = res.data

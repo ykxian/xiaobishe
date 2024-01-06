@@ -44,12 +44,32 @@ export default {
       operation:""
     }
   },
+  created() {
+    this.load()
+  },
   methods: {
+    //清空日志
     clear() {
-
+      this.request.delete("/log/user/remove").then(res => {
+        if (res) {
+          this.$message.success("清空成功")
+          this.load()
+        } else {
+          this.$message.error("清空失败")
+        }
+      })
     },
     load(){
-
+      this.request.get("/log/user/page", {
+        params: {
+          pageNum: this.pageNum,
+          pageSize: this.pageSize,
+          id: this.id,
+        }
+      }).then(res => {
+        this.tableData = res.records
+        this.total = res.total
+      })
     },
     handleSizeChange(pageSize) {
       this.pageSize = pageSize

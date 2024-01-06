@@ -50,17 +50,17 @@ export default {
   methods: {
     //清空日志
     clear() {
-      // this.request.delete("/log/clear").then(res => {
-      //   if (res) {
-      //     this.$message.success("清空成功")
-      //     this.load()
-      //   } else {
-      //     this.$message.error("清空失败")
-      //   }
-      // })
+      this.request.delete("/log/device/remove").then(res => {
+        if (res) {
+          this.$message.success("清空成功")
+          this.load()
+        } else {
+          this.$message.error("清空失败")
+        }
+      })
     },
     load(){
-      this.request.get("/log/page", {
+      this.request.get("/log/device/page", {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
