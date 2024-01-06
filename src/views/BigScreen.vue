@@ -106,10 +106,13 @@ export default {
         communityCount: '',
         openUserCount: '',
         iotDoorControlCount: ''
-      }
+      },
+      deviceAmount: '',
+      communityAmount: ''
     }
   },
-  mounted () {
+  async mounted () {
+    await this.fetchData();
     this.initUserMap()
     this.showLoading()
     this.setElementHeight()
@@ -119,6 +122,11 @@ export default {
     })
   },
   methods: {
+    async fetchData() {
+        const response = await this.request.get("/bigscreen/communityData")
+        this.deviceAmount = response.deviceAmount
+        this.communityAmount = response.communityAmount
+    },
     // 用户地图
     initUserMap () {
       const scene = new Scene({
@@ -139,15 +147,15 @@ export default {
         this.cityInfoList.push( {
           id: 'u-iotdoor',
           name: '全国设备总量',
-          value: this.formatter(cityData.data.iotdoorControlCount),
-          valueArr: this.formatter(cityData.data.iotdoorControlCount).split('')
+          value: this.formatter(this.deviceAmount),
+          valueArr: this.formatter(this.deviceAmount).split('')
           // type: cityData.data.iotdoorControlCountUpType,
           // percentage: `${(cityData.data.iotdoorControlCountPercentage * 100).toFixed(1)} %`
         }, {
           id: 'u-city',
           name: '全国设备地区',
-          value: this.formatter(cityData.data.communityCount),
-          valueArr: this.formatter(cityData.data.communityCount).split('')
+          value: this.formatter(this.communityAmount),
+          valueArr: this.formatter(this.communityAmount).split('')
           // type: cityData.data.communityCountUpType,
           // percentage: `${(cityData.data.communityCountPercentage * 100).toFixed(1)}%`
         })
