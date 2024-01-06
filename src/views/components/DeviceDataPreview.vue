@@ -101,25 +101,34 @@ export default {
       this.initDeviceWarning()
     }
   },
-  mounted () {
-    this.fetchData()
+  async mounted () {
+    await this.fetchData()
     this.initDeviceSateConfig()
     this.initDeviceConfig()
     this.initDeviceProportionType()
-    this.initDeviceModelType()
     this.initDeviceWarning()
+    this.initDeviceModelType()
   },
   methods: {
     //拉取数据
     async fetchData () {
       const response = await this.request.get("/bigscreen/data")
+      console.log(response)
+      // 在这里处理获取到的数据
       this.deviceWarningData = response.deviceWarningData
+      console.log(JSON.parse(JSON.stringify(this.deviceWarningData)))
+      // this.deviceWarningData = JSON.parse(JSON.stringify(this.deviceWarningData))
       this.deviceStateData = response.deviceStateData
+      // this.deviceStateData = JSON.parse(JSON.stringify(this.deviceStateData))
       this.deviceSortData = response.deviceSortData
+      // this.deviceSortData = JSON.parse(JSON.stringify(this.deviceSortData))
       this.deviceTypeData = response.deviceTypeData
+      // this.deviceTypeData = JSON.parse(JSON.stringify(this.deviceTypeData))
     },
     // 设备状态
     initDeviceSateConfig () {
+      var deviceStateData = JSON.parse(JSON.stringify(this.deviceStateData))
+      console.log(deviceStateData)
       if (this.deviceStateData.code !== 0) return
       clearInterval(this.onlineTimer)
       this.onlineTimer = null
