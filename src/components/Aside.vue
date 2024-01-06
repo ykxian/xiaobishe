@@ -37,6 +37,20 @@
         <span slot="title">大屏管理</span>
       </el-menu-item>
     </el-submenu>
+    <el-submenu index="4">
+      <template slot="title">
+        <i class="el-icon-position"></i>
+        <span slot="title">日志管理</span>
+      </template>
+      <el-menu-item index="/userlog" >
+        <i class="el-icon-document"></i>
+        <span slot="title">用户日志</span>
+      </el-menu-item>
+      <el-menu-item index="/devicelog">
+        <i class="el-icon-document"></i>
+        <span slot="title">设备日志</span>
+      </el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 

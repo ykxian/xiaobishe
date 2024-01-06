@@ -14,8 +14,10 @@ const routes = [
     redirect: "/home",
     children: [
       { path: 'home', name: '首页', component: () => import('../views/Home.vue')},
-      { path: 'device', name: '设备管理', component: () => import('../views/Device.vue')}
-      //{ path: 'bigscreen', name: '大屏管理', component: () => import('../views/BigScreen.vue')}
+      { path: 'device', name: '设备管理', component: () => import('../views/Device.vue')},
+      { path: 'userlog', name: '用户日志', component: () => import('../views/UserLog.vue')},
+      { path: 'devicelog', name: '设备日志', component: () => import('../views/DeviceLog.vue')}
+
     ]
   },
   {
