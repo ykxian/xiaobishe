@@ -23,7 +23,7 @@
       <el-button style="margin:5px" type="primary" @click="handleExport">导出 <i class="el-icon-top"></i></el-button>
     </div>
 
-    <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"  @selection-change="handleSelectionChange">
+    <el-table :data="tableData" border stripe :header-cell-class-name="'headerBg'"  @selection-change="handleSelectionChange" >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="id" label="ID" width="80"></el-table-column>
       <el-table-column prop="dName" label="名称" width="140"></el-table-column>
@@ -281,12 +281,10 @@ export default {
       this.load()
     },
     handleSizeChange(pageSize) {
-      console.log("pagesize="+pageSize)
       this.pageSize = pageSize
       this.load()
     },
     handleCurrentChange(pageNum) {
-      console.log("pagenum="+pageNum)
       this.pageNum = pageNum
       this.load()
     },

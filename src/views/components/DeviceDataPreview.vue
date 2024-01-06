@@ -113,6 +113,7 @@ export default {
     //拉取数据
     async fetchData () {
       const response = await this.request.get("/bigscreen/data")
+      console.log("ces="+response.deviceSortData)
       this.deviceWarningData = response.deviceWarningData
       this.deviceStateData = response.deviceStateData
       this.deviceSortData = response.deviceSortData
